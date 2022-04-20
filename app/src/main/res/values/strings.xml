@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Rabtay</string>
+    <string name="ContactName">Contact Name</string>
+    <string name="ContactNumber">Contact Number</string>
+</resources>
