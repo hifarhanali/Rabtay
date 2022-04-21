@@ -1,42 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="5dp"
-    app:cardUseCompatPadding="true"
-    app:cardBackgroundColor="@color/contact_view_background"
-    >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:maxHeight="100dp"
+    app:contentPadding="20dp"
+    android:background="@color/white"
+    android:layout_marginBottom="10dp"
+    app:cardUseCompatPadding="true">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/contact_photo_imageview"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@drawable/ic_launcher_background"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#DFDFDF"/>
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/contact_profile_foreground"
+            app:civ_circle_background_color="@color/contact_view_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/contact_name_textview"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toEndOf="@+id/contact_photo_imageview"
-            android:text="@string/ContactName"
-            />
+            android:maxWidth="300dp"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/contact_photo_imageview"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/contact_number_textview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toEndOf="@+id/contact_name_textview"
-            android:text="@string/ContactNumber"
-            />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/contact_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/h2_text_size"
+                android:textColor="@color/h2_text_color"
+                android:textStyle="bold"
+                android:text="@string/ContactName" />
+
+            <TextView
+                android:id="@+id/contact_number_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/normal_text_color"
+                android:textSize="@dimen/medium_text_size"
+                android:text="@string/ContactNumber"
+                tools:layout_editor_absoluteY="19dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

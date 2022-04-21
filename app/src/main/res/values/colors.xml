@@ -8,5 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="contact_view_background">#D8D7D7</color>
+    <color name="dark_gray_200">#303030</color>
+    <color name="dark_gray_500">#232323</color>
+
+    <color name="h1_text_color">@color/dark_gray_500</color>
+    <color name="h2_text_color">@color/dark_gray_200</color>
+    <color name="normal_text_color">@color/black</color>
+
+    <color name="contact_view_background">#EAE9E9</color>
 </resources>
