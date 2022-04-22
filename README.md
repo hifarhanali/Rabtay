@@ -1,0 +1,1 @@
+An android app that reads user contacts from the Contact Content Provider and save them in the SQLite Database using Room ORM. It then fetches the contracts from the database and bind them in a recycler view.
