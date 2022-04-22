@@ -2,32 +2,48 @@ package com.example.rabtay
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
     private val permissionRequester = PermissionRequester(this)
+    private lateinit var contactsList: List<Contact>
+    private lateinit var contactViewModel: ContactViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val contactsListRecyclerView =
-            this.findViewById<RecyclerView>(R.id.contacts_list_recyclerview)
+        contactViewModel = ViewModelProvider(this)[ContactViewModel::class.java]
 
-        lateinit var contactsList: List<Contact>
         if (permissionRequester.hasReadContactsPermission()) {
+            // read contacts from the content provider
             contactsList = readContacts()
+
+            // insert contacts in the database
+            contactViewModel.insertContacts(contactsList)
+
+            contactViewModel.fetchContacts.observe(this, Observer {
+                contactsList = it
+            })
+
+            val contactsListRecyclerView =
+                this.findViewById<RecyclerView>(R.id.contacts_list_recyclerview)
+            contactsListRecyclerView.adapter = ContactsAdaptor(contactsList)
+            contactsListRecyclerView.layoutManager = LinearLayoutManager(this)
+
         } else {
             permissionRequester.requestReadContactsPermission()
         }
-        contactsListRecyclerView.adapter = ContactsAdaptor(contactsList)
-        contactsListRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun readContacts() = ContactsFetcher(this.contentResolver).fetch()
+
+    // read contacts from the Contact Content Provider
+    private fun readContacts() = ContactContentResolver(this.contentResolver).fetch()
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

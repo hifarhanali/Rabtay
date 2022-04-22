@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.core.net.toUri
 import kotlin.contracts.contract
 
-class ContactsFetcher(private val contentResolver: ContentResolver) {
+class ContactContentResolver(private val contentResolver: ContentResolver) {
     @SuppressLint("Range")
     fun fetch(): List<Contact> {
         val contactsList = mutableListOf<Contact>()
@@ -53,7 +53,6 @@ class ContactsFetcher(private val contentResolver: ContentResolver) {
 
                         phoneCursor.use { phoneCursor ->
                             if (phoneCursor != null && phoneCursor.moveToNext()) {
-                                Log.d("Fetcher", "$id $name $hasPhoneNumber")
                                 contactsList.add(
                                     Contact(
                                         id,
@@ -72,9 +71,6 @@ class ContactsFetcher(private val contentResolver: ContentResolver) {
                 }
             }
         }
-
-        Log.d("Fetcher", "${contactsList.size}")
-
 
         return contactsList;
     }

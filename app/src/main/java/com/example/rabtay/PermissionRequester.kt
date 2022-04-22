@@ -16,18 +16,24 @@ class PermissionRequester(private val ctx: MainActivity) {
     }
 
     fun hasReadContactsPermission() =
-            ContextCompat.checkSelfPermission(ctx, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
+        ContextCompat.checkSelfPermission(
+            ctx,
+            Manifest.permission.READ_CONTACTS
+        ) == PackageManager.PERMISSION_GRANTED
 
     fun requestReadContactsPermission() {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(ctx, Manifest.permission.READ_CONTACTS)) {
-                Toast.makeText(
-                    ctx,
-                    "Read contacts permission is needed to display contacts",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                ActivityCompat.requestPermissions(ctx, requestPermissions, REQUEST_PERMISSION_CODE)
-            }
+        if (ActivityCompat.shouldShowRequestPermissionRationale(
+                ctx,
+                Manifest.permission.READ_CONTACTS
+            )
+        ) {
+            Toast.makeText(
+                ctx,
+                "Read contacts permission is needed to display contacts",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        ActivityCompat.requestPermissions(ctx, requestPermissions, REQUEST_PERMISSION_CODE)
     }
 
     fun onRequestPermissionsResult(
