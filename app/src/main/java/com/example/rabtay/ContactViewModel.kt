@@ -32,4 +32,5 @@ class ContactViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    fun searchContacts(searchQuery: String) = repository.searchContacts(searchQuery)
 }

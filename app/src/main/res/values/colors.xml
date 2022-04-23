@@ -16,4 +16,7 @@
     <color name="normal_text_color">@color/black</color>
 
     <color name="contact_view_background">#EAE9E9</color>
+
+    <color name="ic_search_background">#6102EF</color>
+    <color name="contact_profile_background">#E7E7E7</color>
 </resources>

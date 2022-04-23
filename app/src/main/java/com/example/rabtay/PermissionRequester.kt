@@ -33,7 +33,9 @@ class PermissionRequester(private val ctx: MainActivity) {
                 Toast.LENGTH_SHORT
             ).show()
         }
-        ActivityCompat.requestPermissions(ctx, requestPermissions, REQUEST_PERMISSION_CODE)
+        else{
+            ActivityCompat.requestPermissions(ctx, requestPermissions, REQUEST_PERMISSION_CODE)
+        }
     }
 
     fun onRequestPermissionsResult(
@@ -41,7 +43,7 @@ class PermissionRequester(private val ctx: MainActivity) {
         grantResults: IntArray,
         readContacts: () -> Unit
     ) = if (requestCode == REQUEST_PERMISSION_CODE) {
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (grantResults.count() > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             readContacts()
         } else {
             Toast.makeText(ctx, "Permission was not granted", Toast.LENGTH_SHORT).show()
