@@ -9,8 +9,8 @@ import androidx.core.content.ContextCompat
 
 class PermissionRequester(private val ctx: MainActivity) {
     companion object {
-        private const val REQUEST_PERMISSION_CODE = 101
-        private val requestPermissions = arrayOf(
+        const val REQUEST_PERMISSION_CODE = 101
+        val requestPermissions = arrayOf(
             Manifest.permission.READ_CONTACTS
         )
     }
@@ -37,19 +37,4 @@ class PermissionRequester(private val ctx: MainActivity) {
             ActivityCompat.requestPermissions(ctx, requestPermissions, REQUEST_PERMISSION_CODE)
         }
     }
-
-    fun onRequestPermissionsResult(
-        requestCode: Int,
-        grantResults: IntArray,
-        readContacts: () -> Unit
-    ) = if (requestCode == REQUEST_PERMISSION_CODE) {
-        if (grantResults.count() > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            readContacts()
-        } else {
-            Toast.makeText(ctx, "Permission was not granted", Toast.LENGTH_SHORT).show()
-        }
-        true
-    } else false
-
-
 }
